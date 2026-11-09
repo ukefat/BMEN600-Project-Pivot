@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "temporal-ssl"
+version = "0.1.0"
+description = "Synthetic dynamical systems for temporal SSL shortcut research"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "torch>=2.2", "matplotlib>=3.7"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+temporal-ssl = "temporal_ssl.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["temporal_ssl*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

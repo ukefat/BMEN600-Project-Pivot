@@ -1,0 +1,14 @@
+[
+  {"name": "causal-reference", "overrides": {"model.objective": "causal"}},
+  {"name": "masked-reference", "overrides": {"model.objective": "masked"}},
+  {"name": "causal-short-context", "overrides": {"model.objective": "causal", "model.context": 2}},
+  {"name": "masked-high-ratio", "overrides": {"model.objective": "masked", "model.mask_ratio": 0.75}},
+  {"name": "causal-noisy", "overrides": {"model.objective": "causal", "data.noise": 0.15}},
+  {"name": "masked-noisy", "overrides": {"model.objective": "masked", "data.noise": 0.15}},
+  {"name": "causal-hidden-accumulator", "overrides": {"model.objective": "causal", "data.visibility": 0.0}},
+  {"name": "masked-hidden-accumulator", "overrides": {"model.objective": "masked", "data.visibility": 0.0}},
+  {"name": "causal-data-seed", "overrides": {"model.objective": "causal", "data.seed": 19}},
+  {"name": "masked-data-seed", "overrides": {"model.objective": "masked", "data.seed": 19}},
+  {"name": "causal-model-seed", "overrides": {"model.objective": "causal", "training.seed": 23}},
+  {"name": "masked-model-seed", "overrides": {"model.objective": "masked", "training.seed": 23}}
+]

@@ -1,0 +1,10 @@
+[
+  {"name": "ar2-causal", "overrides": {"data.system": "ar2", "model.objective": "causal"}},
+  {"name": "ar2-masked", "overrides": {"data.system": "ar2", "model.objective": "masked"}},
+  {"name": "predictable-causal", "overrides": {"data.system": "predictable", "model.objective": "causal"}},
+  {"name": "predictable-masked", "overrides": {"data.system": "predictable", "model.objective": "masked"}},
+  {"name": "random-causal", "overrides": {"data.system": "random", "model.objective": "causal"}},
+  {"name": "random-masked", "overrides": {"data.system": "random", "model.objective": "masked"}},
+  {"name": "predictable-long-horizon", "overrides": {"model.objective": "causal", "model.horizon": 4}},
+  {"name": "predictable-long-span", "overrides": {"model.objective": "masked", "model.mask_span": 4}}
+]

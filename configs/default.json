@@ -1,0 +1,22 @@
+{
+  "data": {
+    "system": "predictable", "length": 128, "channels": 3,
+    "splits": {"train": 48, "validation": 16, "test": 16},
+    "seed": 7, "noise": 0.03, "normalize": true,
+    "r": [0.92, 0.99], "omega": [0.15, 0.5], "innovation_noise": 0.08,
+    "delta": [0.025, 0.05], "threshold": [0.9, 1.1],
+    "omega0": [0.12, 0.2], "omega1": [0.35, 0.5],
+    "visibility": 0.6, "reset": "wrap"
+  },
+  "model": {
+    "objective": "causal", "patch_size": 4, "d_model": 32, "nhead": 4,
+    "layers": 2, "dropout": 0.0, "horizon": 1, "context": 8,
+    "mask_ratio": 0.5, "mask_span": 2
+  },
+  "training": {
+    "epochs": 10, "batch_size": 8, "lr": 0.001, "weight_decay": 0.01,
+    "grad_clip": 1.0, "seed": 11, "device": "cpu", "threads": 1
+  },
+  "probes": {"alphas": [0.001, 0.1, 10.0], "batch_size": 8, "nonlinear": false, "seed": 101},
+  "evaluation": {"seed": 2000, "transition_radius": 4}
+}
