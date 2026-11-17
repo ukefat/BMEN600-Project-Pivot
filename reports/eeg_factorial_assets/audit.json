@@ -1,0 +1,12 @@
+{
+  "runs": 12,
+  "paired_seeds": 3,
+  "updates_per_model": 10000,
+  "draws_per_model": 640000,
+  "all_windows_visited": true,
+  "paired_initializations_exact": true,
+  "independent_classification_and_r2_checks": true,
+  "bootstrap_matches_point_contrasts": true,
+  "equal_parameter_counts": 56411,
+  "protocol_sha256": "8362d680cb934d5ee810de9c7236777dbf6937433255b1d5d5c79c985ddd2236"
+}

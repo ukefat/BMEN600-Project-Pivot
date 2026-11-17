@@ -11,12 +11,16 @@ dependencies = ["numpy>=1.24", "torch>=2.2", "matplotlib>=3.7"]
 
 [project.optional-dependencies]
 test = ["pytest>=8"]
+eeg = ["numpy>=2.0", "scipy>=1.14", "pandas>=2.2", "scikit-learn>=1.5", "requests>=2.31"]
 
 [project.scripts]
 temporal-ssl = "temporal_ssl.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["temporal_ssl*"]
+
+[tool.setuptools.package-data]
+"temporal_ssl.eeg_course" = ["LICENSE", "ORIGIN.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

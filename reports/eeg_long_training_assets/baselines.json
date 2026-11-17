@@ -1,0 +1,36 @@
+{
+  "train": {
+    "linear": {
+      "mean": 0.0966946296310606,
+      "sd_across_participants": 0.044056303810869404,
+      "participants": 52
+    },
+    "nearest": {
+      "mean": 0.13927466873652658,
+      "sd_across_participants": 0.05584450483933469,
+      "participants": 52
+    },
+    "training_mean": {
+      "mean": 1.0000399849616373,
+      "sd_across_participants": 0.3351134396040279,
+      "participants": 52
+    }
+  },
+  "validation": {
+    "linear": {
+      "mean": 0.09326842641515319,
+      "sd_across_participants": 0.02114214024214313,
+      "participants": 18
+    },
+    "nearest": {
+      "mean": 0.1358135682185767,
+      "sd_across_participants": 0.025797876352051677,
+      "participants": 18
+    },
+    "training_mean": {
+      "mean": 0.9537756160177567,
+      "sd_across_participants": 0.09092654059144865,
+      "participants": 18
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "data_dir": "/home/lukefatovich/github/BMEN-600-Course-Project/preliminary_analysis/data/ds004504",
+  "cache_dir": "data/eeg_pilot",
+  "max_epochs_per_participant": 24,
+  "seed": 600,
+  "model": {"patch_size": 25, "d_model": 32, "nhead": 4, "layers": 2, "dropout": 0.0,
+            "horizon": 1, "context": 80, "mask_ratio": 0.25, "mask_span": 1},
+  "training": {"epochs": 20, "batch_size": 16, "lr": 0.001, "weight_decay": 0.01,
+               "grad_clip": 1.0, "seed": 600, "device": "cuda", "threads": 1},
+  "spans": {"short": 1, "medium": 4, "long": 12},
+  "classifier": {"C": 1.0, "class_weight": null},
+  "evaluation_seed": 2600
+}

@@ -176,9 +176,72 @@ python -m temporal_ssl.reconstruction_plots --root results/research
 
 Under `results/research/analysis/`, `reconstruction_methods` compares trained models against their applicable baselines across systems; `reconstruction_transitions` separates stable and near-switch errors; `reconstruction_difficulty` compares the default and longer horizon/span conditions; and `reconstruction_examples` shows channel-0 traces from the first test trajectory. Each figure is saved as PNG and vector PDF. `reconstruction_comparison.csv` contains the plotted aggregate values. Bars show trajectory-averaged test MSE, averaged across seed pairs; error bars show sample SD across those pairs, with individual pair scores as black dots. Lower is better. Causal and masked tasks use different targets/information and are shown in separate panels. Raw-patch and raw-statistics controls are probe feature sources and have no standalone reconstruction decoder; they are not reconstruction methods. The untrained encoder control likewise evaluates latent probes rather than a trained reconstruction readout.
 
-## Future EEG integration
+## EEG pilot (implemented)
 
-Implement a dataset satisfying `TrajectorySource`: return a float tensor `[T,C]`, metadata, and absent/`None` latent/parameter fields. Segment to a fixed length divisible by patch size before batching. Reuse `collate_trajectories`, the models and training loop; reconstruction evaluation accepts missing transition labels, and probe evaluation skips missing synthetic labels. The current `make_splits` factory is intentionally synthetic: replace its call with externally constructed dataset splits when adding an adapter. Separate participants/sessions before extracting windows; fit normalization on the training partition only. Subject/session splitting and real EEG loading are not implemented. Variable-length/padded EEG batches, JEPA objectives and identifiability proofs are outside this implementation.
+The exploratory ds004504 AD/FTD/HC pilot is described in **[reports/eeg_pilot.md](reports/eeg_pilot.md)**, including actual held-out results, preprocessing, subject counts and limitations. The EEG extra uses Python 3.11+ (tested on 3.12) and NumPy 2+. It uses a single participant-disjoint train/validation/test split, one seed, and four pretraining configurations: direct first-four-second → entire next-four-second causal prediction, plus 25% masked reconstruction at requested spans of 50, 200 and 600 ms. Every model uses 25-sample patches at 500 Hz, the shared two-layer Transformer and the same update budget. A copied, attributed course-project loader preserves supplied derivative filtering/reference, contiguous 8-second epochs and the 19-channel montage; no new preprocessing is fitted across participants. Raw epoch caches retain physical microvolts, and SSL normalization fits training participants only.
+
+```bash
+.venv-gpu/bin/python -m pip install -e '.[eeg,test]'
+# Set data_dir and cache_dir in configs/eeg_pilot.json for your local filesystem.
+.venv-gpu/bin/python -m temporal_ssl.eeg_pilot prepare
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_pilot smoke --output results/eeg_smoke
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_pilot run --output results/eeg_pilot
+# Interrupted runs: repeat the same command with --resume.
+.venv-gpu/bin/python -m temporal_ssl.eeg_pilot report --output results/eeg_pilot
+```
+
+The cache keeps up to 24 evenly spaced usable epochs per participant; exact starts and source checksums are retained. Classifiers use participant-averaged frozen features and a fixed training-only scaler/logistic model. All neural methods and the spectral control use the same first four seconds at classification. Untrained controls match the respective attention/access rules; spectral features reuse the course Welch/band-power implementation. Classification is inductive: test participants never enter SSL pretraining or normalization. Model causality refers to already preprocessed derivative signals; provider offline filtering/ICA can use information across time within a recording.
+
+Core additions: `eeg_data.py` (adapter/cache/splits), `eeg_models.py` (direct fixed-half task), `eeg_pilot.py` (four runs/evaluation), `eeg_report.py` (shareable report), and `eeg_course/` (attributed copied utilities and download fallback). Synthetic objectives and results are unchanged. Optional EEG dependencies are isolated under the `eeg` extra. Tests use generated fixtures, so the test suite does not need the real dataset.
+
+Training-only learning diagnostics are described in [reports/eeg_learning_checks.md](reports/eeg_learning_checks.md). They fit 1 and 4 fixed windows with fixed masks, fit the same 4 windows with resampled masks, perturb only visible inputs, verify masked-value exclusion/gradients, and evaluate different windows from those training participants. They do not retrain the pilot or load validation/test EEG. Reproduce in a new output directory:
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_learning_checks \
+  --pilot results/eeg_pilot --output results/eeg_learning_checks_repeat --steps 2000
+```
+
+The longer short-mask training diagnostic is described in [reports/eeg_long_training.md](reports/eeg_long_training.md). It continues the original epoch-20 checkpoint to 100 total epochs with unchanged data and optimizer settings, while preserving the pilot artifacts. Fixed-mask reconstruction is measured on training and validation participants; test EEG is excluded:
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_long_training \
+  --pilot results/eeg_pilot --output results/eeg_long_training --epochs 100
+# Use a new output directory for a repeat; add --resume for an interrupted continuation.
+```
+
+The full four-objective comparison at 100 total epochs, including repeated frozen dementia classifiers and linear spectral probes, is reported in [reports/eeg_sweep_100.md](reports/eeg_sweep_100.md). It continues the existing checkpoints, reuses the completed short-mask extension, and preserves the original pilot results:
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_sweep_100
+# Add --resume for an interrupted run; use --output for a separate repeat directory.
+```
+
+The medium/long mask continuation to 300 total epochs is reported in [reports/eeg_masked_300.md](reports/eeg_masked_300.md). This diagnostic loads only training and validation EEG, uses fixed-mask mean/interpolation comparisons, and preserves the earlier sweeps:
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_masked_extension \
+  --pilot results/eeg_pilot_100 --output results/eeg_masked_300 --epochs 300
+# Add --resume for an interrupted run with identical settings.
+```
+
+Spectral information recovery from the existing frozen EEG checkpoints is reported in [reports/eeg_spectral_recoverability.md](reports/eeg_spectral_recoverability.md). It reuses the first-four-second participant feature caches, validates spectral/window alignment and frozen encoder loading, and selects ridge penalties on validation participants. No SSL models are retrained:
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_spectral_recoverability \
+  --pilot results/eeg_pilot --output results/eeg_spectral_recoverability
+.venv-gpu/bin/python -m pytest -q tests/test_eeg_spectral_recoverability.py
+```
+
+## Other future EEG integration
+
+For another EEG source, implement a dataset satisfying `TrajectorySource`: return a float tensor `[T,C]`, metadata, and absent/`None` latent/parameter fields. Segment to a fixed length divisible by patch size before batching. Reuse `collate_trajectories`, the models and training loop. The synthetic `make_splits` factory remains separate; `eeg_data.py` demonstrates participant splitting and training-only normalization for real data. Separate participants/sessions before extracting windows. Variable-length/padded EEG batches, JEPA objectives and identifiability proofs remain outside this implementation.
 
 ## Validation
 
@@ -187,3 +250,21 @@ pytest -q
 ```
 
 Tests cover seeded generation, shapes, exact switch/phase dynamics, random transition-rate matching, train-only normalization, independent split seeds, optional label batches, multilevel causal future/context exclusion, masked-value exclusion, loss selection, equal parameter allocation, representation extraction, baselines, probe sanity, both complete pipelines and exact epoch resume with dropout. The eight-run smoke matrix exercises AR(2), predictable and random switching end to end. Its tiny training budget verifies execution and artifacts; it does not establish a research finding.
+
+## EEG data coverage and masking study
+
+The expanded factorial study uses all 4,894 usable training windows in its full-data conditions, crossed with 25%/50% masking, three paired seeds, and matched 10,000-update budgets. Participant-balanced sampling, warmup/cosine decay, exact mask counts, full coverage checks, frozen probes, and paired participant uncertainty are documented in [the fixed protocol](reports/eeg_factorial_protocol.md) and [results report](reports/eeg_factorial.md). Previous experiment artifacts remain separate.
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_factorial --config configs/eeg_factorial.json
+```
+
+The command automatically resumes an identical configuration from saved checkpoints. For a separate study, copy the JSON and change its output directory. The full cache uses the original preprocessing/QC; held-out data are supplied to models only after all pretraining runs finish. Downstream probes use matched original observation panels for every condition, isolating pretraining data coverage.
+
+The subsequent full-data 100/200 ms masked-span comparison (25%/50% masking, three paired seeds, twelve new runs) is in [reports/eeg_span_study.md](reports/eeg_span_study.md). It reuses the completed 50 ms reference, retains 50 ms patch size, and adds realized-gap statistics, matched cross-span reconstruction tasks and paired participant uncertainty:
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_span_study
+```

@@ -1,0 +1,10 @@
+{
+  "runs": 12,
+  "steps_per_run": 10000,
+  "draws_per_run": 640000,
+  "full_coverage": true,
+  "paired_initial_weights_exact": true,
+  "sampling_streams_and_window_exposures_exactly_match_50ms_reference": true,
+  "classification_and_spectral_metrics_independently_verified": true,
+  "reference_unchanged": true
+}

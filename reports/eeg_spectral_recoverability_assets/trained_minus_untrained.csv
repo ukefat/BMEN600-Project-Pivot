@@ -1,0 +1,5 @@
+model,control,delta_r2
+causal,untrained_causal,-0.008596165082671813
+masked_short,untrained_masked,-0.05087064856656538
+masked_medium,untrained_masked,-0.05994155756524369
+masked_long,untrained_masked,-0.06401816660393668

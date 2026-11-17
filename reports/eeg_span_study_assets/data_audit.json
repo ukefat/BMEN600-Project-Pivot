@@ -1,0 +1,15 @@
+{
+  "full_windows": 4894,
+  "capped_windows": 1248,
+  "training_participants": 52,
+  "validation_participants": 18,
+  "validation_windows": 432,
+  "full_hours": 10.875555555555556,
+  "capped_hours": 2.7733333333333334,
+  "capped_is_exact_subset": true,
+  "window_identity_unique": true,
+  "normalization": "original capped-training-only statistics shared across all conditions",
+  "cache_identity": "88a14df8d8c04aead3d8ca0f56e529b3dec34d77dec23464a5aa394fa8c52173",
+  "split_sha256": "4d2306ffa626518a76a3c9489de1ffbc6765a0e062a4b0b3932ddd4f3efd490e",
+  "normalization_sha256": "5eef98b6118592f57d6e01e247ec9868534800f18ee3af8ef3e63d3f9492b861"
+}
