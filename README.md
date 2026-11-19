@@ -268,3 +268,15 @@ The subsequent full-data 100/200 ms masked-span comparison (25%/50% masking, thr
 CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
   .venv-gpu/bin/python -m temporal_ssl.eeg_span_study
 ```
+
+## Masked latent prediction baseline
+
+The LeJEPA-inspired shared-encoder EEG baseline and initial results are in [reports/eeg_latent.md](reports/eeg_latent.md). It predicts original-sequence patch embeddings with a small separate Transformer, applies patch-position-wise across-batch SIGReg, and backpropagates through both shared-weight encoder branches without EMA/stop-gradient. No separate pooled/sample regularizer is added. The waveform experiments remain unchanged.
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_latent_experiment --config configs/eeg_latent.json
+.venv-gpu/bin/python -m pytest -q tests/test_eeg_latent.py
+```
+
+Configuration controls the SIGReg weight/slices, one representative masking setting and matched update budget. Checkpoints resume the independent masking/sampling/SIGReg and Torch/CUDA RNG states. Tests verify the statistic against independent quadrature, masked-value exclusion, both-branch gradients, paired encoder initialization and exact optimizer/SIGReg resumption. The report documents LayerNorm constraints, effective-rank conventions and temporal-homogenization diagnostics; this is an adaptation rather than a LeJEPA reproduction.

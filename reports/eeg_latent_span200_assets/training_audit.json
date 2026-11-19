@@ -1,0 +1,11 @@
+{
+  "visited_windows": 4894,
+  "draws": 640000,
+  "updates": 10000,
+  "parameters": 54560,
+  "predictor_parameters": 13824,
+  "initial_encoder_matches_waveform": true,
+  "sampling_and_coverage_match_waveform": true,
+  "raw_reference_best_sha256": "aa4bf05ea73cd3eb09bcef03cd60ef56c5e15e09b4b4f714bd0e3cc1c8bdcd9a",
+  "latent_training_seconds": 166.37029810997774
+}

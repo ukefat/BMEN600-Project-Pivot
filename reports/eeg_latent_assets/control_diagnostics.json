@@ -1,0 +1,30 @@
+{
+  "untrained": {
+    "patch_variance": 0.28222479875389983,
+    "patch_effective_rank": 2.526922220236844,
+    "pooled_variance": 0.003826111755089482,
+    "pooled_effective_rank": 6.013298800451149,
+    "within_window_variance": 0.53574747086048
+  },
+  "latent": {
+    "patch_variance": 0.6494116895056546,
+    "patch_effective_rank": 3.435187206750486,
+    "pooled_variance": 0.646922909871678,
+    "pooled_effective_rank": 3.393928715991805,
+    "within_window_variance": 0.002656348731864139
+  },
+  "latent_final": {
+    "patch_variance": 0.6977473972780944,
+    "patch_effective_rank": 3.6245194749486984,
+    "pooled_variance": 0.6936130993485492,
+    "pooled_effective_rank": 3.6023878936038223,
+    "within_window_variance": 0.004263919737024929
+  },
+  "waveform": {
+    "patch_variance": 0.049162862795569334,
+    "patch_effective_rank": 1.4419923937882275,
+    "pooled_variance": 0.00021708476558823762,
+    "pooled_effective_rank": 2.8511137872090186,
+    "within_window_variance": 0.049242229434186074
+  }
+}
