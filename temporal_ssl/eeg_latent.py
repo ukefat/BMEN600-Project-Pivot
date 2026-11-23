@@ -31,7 +31,7 @@ class SIGReg(nn.Module):
 
 
 class MaskedLatentPrediction(TemporalSSL):
-    def __init__(self,channels,length,*,sigreg_weight=.02,sigreg_slices=64,**kwargs):
+    def __init__(self,channels,length,*,sigreg_weight=.02,sigreg_slices=64,target_context=None,**kwargs):
         # Initialize the exact existing backbone before allocating the predictor.
         super().__init__(channels,length,objective='masked',**kwargs)
         width=self.embedding.out_features
@@ -42,6 +42,22 @@ class MaskedLatentPrediction(TemporalSSL):
         self.prediction_head=nn.Linear(width,width)
         self.sigreg=SIGReg(sigreg_slices)
         self.sigreg_weight=sigreg_weight
+        if target_context is not None and (target_context<1 or target_context%2==0):
+            raise ValueError('Target context must be a positive odd number')
+        self.target_context=target_context
+
+    def encode_targets(self,x):
+        patches=patchify(x,self.patch_size)
+        if self.target_context is None:return self.encode(patches)
+        b,n,_=patches.shape;r=self.target_context//2
+        indices=torch.arange(n,device=x.device)[:,None]+torch.arange(-r,r+1,device=x.device)[None,:]
+        padding=(indices<0)|(indices>=n)
+        safe=indices.clamp(0,n-1)
+        tokens=self.embedding(patches)+self.positions[:n]
+        windows=tokens[:,safe].reshape(b*n,self.target_context,-1)
+        forbidden=padding.unsqueeze(0).expand(b,-1,-1).reshape(b*n,self.target_context)
+        local=self.encoder(windows,src_key_padding_mask=forbidden)
+        return local[:,r].reshape(b,n,-1)
 
     def predict_masked(self,x,mask):
         local=self.encode(patchify(x,self.patch_size),mask)
@@ -51,7 +67,7 @@ class MaskedLatentPrediction(TemporalSSL):
 
     def forward(self,x,mask,sigreg_generator=None):
         if not mask.any():raise ValueError('Need masked prediction targets')
-        original=self.encode(patchify(x,self.patch_size))
+        original=self.encode_targets(x)
         prediction,masked=self.predict_masked(x,mask)
         latent_loss=(prediction-original).square().mean(-1)[mask].mean()
         regularizer=self.sigreg(original,sigreg_generator)

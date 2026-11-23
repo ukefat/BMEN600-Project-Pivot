@@ -1,0 +1,170 @@
+[
+  {
+    "model": "masked_50ms_25pct",
+    "seed": 600,
+    "checkpoint": "results/eeg_factorial/full_mask25/seed_600/best.pt",
+    "sha256": "aa4bf05ea73cd3eb09bcef03cd60ef56c5e15e09b4b4f714bd0e3cc1c8bdcd9a",
+    "selected_step": 9500
+  },
+  {
+    "model": "masked_50ms_25pct",
+    "seed": 601,
+    "checkpoint": "results/eeg_factorial/full_mask25/seed_601/best.pt",
+    "sha256": "500ab4d69ccdc40cd8e5250a161075914f0e87bdc5712f1e1ca3e38afdbbac97",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_50ms_25pct",
+    "seed": 602,
+    "checkpoint": "results/eeg_factorial/full_mask25/seed_602/best.pt",
+    "sha256": "6645863e1c31bf9f9cd0bfb74c7d85ec904f64573918342f52e7f5c2a0b23e76",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_50ms_50pct",
+    "seed": 600,
+    "checkpoint": "results/eeg_factorial/full_mask50/seed_600/best.pt",
+    "sha256": "7596c83cc156775e8d7af6465df2b579cb1b735c3351086b047bea2320b7fba6",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_50ms_50pct",
+    "seed": 601,
+    "checkpoint": "results/eeg_factorial/full_mask50/seed_601/best.pt",
+    "sha256": "5fadc39cfe706526e92ee0c965e23f4b97dd1b8c7a47fef4057b20ff23989782",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_50ms_50pct",
+    "seed": 602,
+    "checkpoint": "results/eeg_factorial/full_mask50/seed_602/best.pt",
+    "sha256": "000aee814e7c1577f28f82c6bab5dd0509b87f97d38d3fb9051c0af1cbe071eb",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_100ms_25pct",
+    "seed": 600,
+    "checkpoint": "results/eeg_span_study/span100/full_mask25/seed_600/best.pt",
+    "sha256": "229df069e27682915bdc0aefa2efe56e44db64d541175524dbe5fe5ceac437bd",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_100ms_25pct",
+    "seed": 601,
+    "checkpoint": "results/eeg_span_study/span100/full_mask25/seed_601/best.pt",
+    "sha256": "1fd3a4a24d61a992b89006e3fd998d91fd2b712bbf26df3d57c1338e28467443",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_100ms_25pct",
+    "seed": 602,
+    "checkpoint": "results/eeg_span_study/span100/full_mask25/seed_602/best.pt",
+    "sha256": "44d7dbe0a0d8bfcde6675080571127ace2f5643ce3a8f9b56b7df1587a0e4e32",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_100ms_50pct",
+    "seed": 600,
+    "checkpoint": "results/eeg_span_study/span100/full_mask50/seed_600/best.pt",
+    "sha256": "997ea6a59d9ed371cd74ca812f8be4d9e45b497642667e07b64d52013e077dba",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_100ms_50pct",
+    "seed": 601,
+    "checkpoint": "results/eeg_span_study/span100/full_mask50/seed_601/best.pt",
+    "sha256": "9b456699af6afee0addd4ffeb92e7aabc58ded757cff6c9b03a50de7cc955efa",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_100ms_50pct",
+    "seed": 602,
+    "checkpoint": "results/eeg_span_study/span100/full_mask50/seed_602/best.pt",
+    "sha256": "4332ea48f56c2c2fcc7d2683e6f619fbf61e609706d86c47692c5246dcee977f",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_200ms_25pct",
+    "seed": 600,
+    "checkpoint": "results/eeg_span_study/span200/full_mask25/seed_600/best.pt",
+    "sha256": "f89e32867ed1a8d400648b6b5732266c0bd4bfed7abc97e0897a03f5a3aaeb6e",
+    "selected_step": 9500
+  },
+  {
+    "model": "masked_200ms_25pct",
+    "seed": 601,
+    "checkpoint": "results/eeg_span_study/span200/full_mask25/seed_601/best.pt",
+    "sha256": "3eac38ae7a23b776f04fd353297fdb7ab97c66dc74d6f73b5fda10bb83501bfb",
+    "selected_step": 9500
+  },
+  {
+    "model": "masked_200ms_25pct",
+    "seed": 602,
+    "checkpoint": "results/eeg_span_study/span200/full_mask25/seed_602/best.pt",
+    "sha256": "a5ff6df23dab1c3d7c336de7d306ad29cdca63c72cfd0b72151ce719b1ca426b",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_200ms_50pct",
+    "seed": 600,
+    "checkpoint": "results/eeg_span_study/span200/full_mask50/seed_600/best.pt",
+    "sha256": "b5cb79d6726736c7712489806bc91ff989c85326ddddd2f3a94556702e9cdf93",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_200ms_50pct",
+    "seed": 601,
+    "checkpoint": "results/eeg_span_study/span200/full_mask50/seed_601/best.pt",
+    "sha256": "144700ce7b63b264e3e3c57ad8fbcc92c298f816f1d2d5554c922f52c66bdac3",
+    "selected_step": 10000
+  },
+  {
+    "model": "masked_200ms_50pct",
+    "seed": 602,
+    "checkpoint": "results/eeg_span_study/span200/full_mask50/seed_602/best.pt",
+    "sha256": "2e5512f274c67a0c1fd04e000b9e45ba2976ccd94c9d5506d3d6804ee4c57f34",
+    "selected_step": 10000
+  },
+  {
+    "model": "causal_context80",
+    "seed": 600,
+    "checkpoint": "results/eeg_reconstruction_study/context80/seed_600/best.pt",
+    "sha256": "28c833f2af52aadfeeb85ddcb7c7033ef85e1977f70e0ad96d68e8e23045b2f5",
+    "selected_step": 4500
+  },
+  {
+    "model": "causal_context80",
+    "seed": 601,
+    "checkpoint": "results/eeg_reconstruction_study/context80/seed_601/best.pt",
+    "sha256": "84ad020c1cb57cca65c8051ff1bb33d3a5ac46c189cc5e3987a470da2646d572",
+    "selected_step": 3000
+  },
+  {
+    "model": "causal_context80",
+    "seed": 602,
+    "checkpoint": "results/eeg_reconstruction_study/context80/seed_602/best.pt",
+    "sha256": "f643ea6b4cd7e7c835c8194db445d877125822fcc633080269e708ec17467550",
+    "selected_step": 3500
+  },
+  {
+    "model": "causal_context107",
+    "seed": 600,
+    "checkpoint": "results/eeg_reconstruction_study/context107/seed_600/best.pt",
+    "sha256": "43b8a40eab29bc1646f62bf0c9b192f724b307b8745e791726ceb9d898c1fb84",
+    "selected_step": 4000
+  },
+  {
+    "model": "causal_context107",
+    "seed": 601,
+    "checkpoint": "results/eeg_reconstruction_study/context107/seed_601/best.pt",
+    "sha256": "6376acfcedc6f354e16a14f8f05a169e1ebdcb999e59d4ba3bc15ee01d44dead",
+    "selected_step": 3500
+  },
+  {
+    "model": "causal_context107",
+    "seed": 602,
+    "checkpoint": "results/eeg_reconstruction_study/context107/seed_602/best.pt",
+    "sha256": "99db08356c4415253bc40a5c528fb9236de4efb700035e2aa0341fdabf76fc4b",
+    "selected_step": 3500
+  }
+]

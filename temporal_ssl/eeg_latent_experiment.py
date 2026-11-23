@@ -16,7 +16,7 @@ from .plots import plt,finish
 
 
 def make_model(cfg,model_cfg):
-    return MaskedLatentPrediction(19,4000,sigreg_weight=cfg['sigreg_weight'],sigreg_slices=cfg['sigreg_slices'],**model_cfg['model'])
+    return MaskedLatentPrediction(19,4000,sigreg_weight=cfg['sigreg_weight'],sigreg_slices=cfg['sigreg_slices'],target_context=cfg.get('target_context'),**model_cfg['model'])
 
 
 @torch.no_grad()

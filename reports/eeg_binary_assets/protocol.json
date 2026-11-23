@@ -1,0 +1,59 @@
+{
+  "counts": {
+    "train": {
+      "participants": 39,
+      "AD": 22,
+      "HC": 17
+    },
+    "validation": {
+      "participants": 13,
+      "AD": 7,
+      "HC": 6
+    },
+    "test": {
+      "participants": 13,
+      "AD": 7,
+      "HC": 6
+    }
+  },
+  "positive_class": "AD",
+  "negative_class": "HC",
+  "FTD_in_classifier": false,
+  "FTD_in_original_SSL": true,
+  "ssl_retrained": false,
+  "C": 1,
+  "labels_used_in_checkpoint_selection": false,
+  "source_features": [
+    "results/eeg_factorial/full_mask25/seed_600/classification/participant_features.npz",
+    "results/eeg_factorial/full_mask25/seed_601/classification/participant_features.npz",
+    "results/eeg_factorial/full_mask25/seed_602/classification/participant_features.npz",
+    "results/eeg_factorial/full_mask50/seed_600/classification/participant_features.npz",
+    "results/eeg_factorial/full_mask50/seed_601/classification/participant_features.npz",
+    "results/eeg_factorial/full_mask50/seed_602/classification/participant_features.npz",
+    "results/eeg_span_study/span100/full_mask25/seed_600/classification/participant_features.npz",
+    "results/eeg_span_study/span100/full_mask25/seed_601/classification/participant_features.npz",
+    "results/eeg_span_study/span100/full_mask25/seed_602/classification/participant_features.npz",
+    "results/eeg_span_study/span100/full_mask50/seed_600/classification/participant_features.npz",
+    "results/eeg_span_study/span100/full_mask50/seed_601/classification/participant_features.npz",
+    "results/eeg_span_study/span100/full_mask50/seed_602/classification/participant_features.npz",
+    "results/eeg_span_study/span200/full_mask25/seed_600/classification/participant_features.npz",
+    "results/eeg_span_study/span200/full_mask25/seed_601/classification/participant_features.npz",
+    "results/eeg_span_study/span200/full_mask25/seed_602/classification/participant_features.npz",
+    "results/eeg_span_study/span200/full_mask50/seed_600/classification/participant_features.npz",
+    "results/eeg_span_study/span200/full_mask50/seed_601/classification/participant_features.npz",
+    "results/eeg_span_study/span200/full_mask50/seed_602/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context80/seed_600/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context80/seed_601/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context80/seed_602/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context107/seed_600/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context107/seed_601/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context107/seed_602/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context80/seed_600/untrained_classification/participant_features.npz",
+    "results/eeg_factorial/untrained/seed_600/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context80/seed_601/untrained_classification/participant_features.npz",
+    "results/eeg_factorial/untrained/seed_601/classification/participant_features.npz",
+    "results/eeg_reconstruction_study/context80/seed_602/untrained_classification/participant_features.npz",
+    "results/eeg_factorial/untrained/seed_602/classification/participant_features.npz",
+    "results/eeg_pilot/spectral/participant_features.npz"
+  ]
+}

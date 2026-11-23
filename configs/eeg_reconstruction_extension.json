@@ -1,0 +1,28 @@
+{
+  "pilot": "results/eeg_pilot",
+  "cache": "data/eeg_full_windows",
+  "output": "results/eeg_reconstruction_extension",
+  "seeds": [
+    600,
+    601,
+    602
+  ],
+  "steps": 10000,
+  "batch_size": 64,
+  "validation_every": 500,
+  "warmup_steps": 500,
+  "lr": 0.001,
+  "min_lr": 1e-05,
+  "mask_span": 1,
+  "ratios": [
+    0.75
+  ],
+  "data_conditions": [
+    "full"
+  ],
+  "evaluation_seed": 2600,
+  "contexts": [
+    120
+  ],
+  "reference": "results/eeg_reconstruction_study"
+}

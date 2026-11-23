@@ -1,0 +1,82 @@
+{
+  "seed": 600,
+  "device": "cuda",
+  "bands": {
+    "delta": [
+      1.0,
+      4.0
+    ],
+    "theta": [
+      4.0,
+      8.0
+    ],
+    "alpha": [
+      8.0,
+      13.0
+    ],
+    "beta": [
+      13.0,
+      30.0
+    ],
+    "gamma": [
+      30.0,
+      45.0
+    ]
+  },
+  "checkpoints": [
+    {
+      "model": "causal",
+      "checkpoint": "results/eeg_reconstruction_study/context80/seed_600/best.pt",
+      "sha256": "28c833f2af52aadfeeb85ddcb7c7033ef85e1977f70e0ad96d68e8e23045b2f5"
+    },
+    {
+      "model": "untrained_causal",
+      "checkpoint": "results/eeg_reconstruction_study/context80/seed_600/untrained.pt",
+      "sha256": "00b5743970404abaee0f148383aa6a9c19ec783669e2f51b59b40dbefa10c1dc"
+    },
+    {
+      "model": "masked",
+      "checkpoint": "results/eeg_factorial/full_mask25/seed_600/best.pt",
+      "sha256": "aa4bf05ea73cd3eb09bcef03cd60ef56c5e15e09b4b4f714bd0e3cc1c8bdcd9a"
+    },
+    {
+      "model": "untrained_masked",
+      "checkpoint": "results/eeg_factorial/full_mask25/seed_600/untrained.pt",
+      "sha256": "00b5743970404abaee0f148383aa6a9c19ec783669e2f51b59b40dbefa10c1dc"
+    }
+  ],
+  "split_sha256": "4d2306ffa626518a76a3c9489de1ffbc6765a0e062a4b0b3932ddd4f3efd490e",
+  "normalization_sha256": "5eef98b6118592f57d6e01e247ec9868534800f18ee3af8ef3e63d3f9492b861",
+  "window_counts": {
+    "train": 1248,
+    "validation": 432,
+    "test": 432
+  },
+  "participant_counts": {
+    "train": 52,
+    "validation": 18,
+    "test": 18
+  },
+  "input_seconds": 4,
+  "input_samples": 2000,
+  "channel_aggregation": "mean of channel-wise relative powers",
+  "welch_seconds": 2,
+  "overlap": 0.5,
+  "denominator_hz": [
+    1,
+    45
+  ],
+  "alpha_grid": [
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0,
+    10000.0
+  ],
+  "fit": "train only; validation selects alpha by uniform mean R2; no refit",
+  "bootstrap": "2000 paired participant draws; conditional on fitted probes; unadjusted 95% intervals",
+  "source_sha256": "61b5ac0b3079ee9d3719f9c11f111eddcdf0035b0b4ed8fb8dc0099598162189"
+}

@@ -280,3 +280,22 @@ CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
 ```
 
 Configuration controls the SIGReg weight/slices, one representative masking setting and matched update budget. Checkpoints resume the independent masking/sampling/SIGReg and Torch/CUDA RNG states. Tests verify the statistic against independent quadrature, masked-value exclusion, both-branch gradients, paired encoder initialization and exact optimizer/SIGReg resumption. The report documents LayerNorm constraints, effective-rank conventions and temporal-homogenization diagnostics; this is an adaptation rather than a LeJEPA reproduction.
+
+The one-/five-patch local-target ablation is documented in [reports/eeg_latent_local.md](reports/eeg_latent_local.md). Independent target windows strictly bound the target branch's receptive field through all layers; the masked branch and frozen feature protocol remain full-context. Run both with `CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 .venv-gpu/bin/python -m temporal_ssl.eeg_latent_local`. Existing global-target and waveform artifacts are preserved.
+
+## Central waveform baseline
+
+[reports/eeg_reconstruction_study.md](reports/eeg_reconstruction_study.md) consolidates the matched full-data masked span/ratio results, newly trained causal 1:1 and approximately 2:1 context/forecast tasks, untrained attention-matched controls and the handcrafted spectral classifier. All trained configurations use three paired seeds, the same architecture and 10,000 updates × batch 64; frozen diagnosis observations remain the same first four seconds. Reconstruction tasks are shown with their own permitted-information baselines and are not ranked directly across masking and forecasting.
+
+```bash
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 \
+  .venv-gpu/bin/python -m temporal_ssl.eeg_reconstruction_study
+```
+
+The AD-versus-healthy-control frozen-readout follow-up is in [reports/eeg_binary.md](reports/eeg_binary.md). Run `.venv-gpu/bin/python -m temporal_ssl.eeg_binary` to refit the same fixed classifiers after excluding FTD from downstream training/evaluation. Existing SSL pretraining is unchanged and included training-participant FTD EEG; binary chance balanced accuracy is 50%.
+
+The expanded **three-class** baseline, adding exact 3:1 causal prediction (6 s → 2 s) and 75% masking at 50/100/200 ms spans, is centralized in [reports/eeg_reconstruction_extended.md](reports/eeg_reconstruction_extended.md). It reuses prior matched configurations and trains twelve new paired-seed runs with the same full-data/update protocol. Run `CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 .venv-gpu/bin/python -m temporal_ssl.eeg_reconstruction_extension` to reproduce or resume it. Earlier central and binary artifacts are preserved.
+
+The frozen patch-pooling ablation is in [reports/eeg_pooling.md](reports/eeg_pooling.md): mean, standard deviation, and concatenated mean+std across patch embeddings, followed by unchanged participant averaging, for all 36 waveform checkpoints and both untrained controls across three seeds. Reproduce/resume with `CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 .venv-gpu/bin/python -m temporal_ssl.eeg_pooling`. No SSL retraining is performed.
+
+The focused five-band **window-level** spectral probe is in [reports/eeg_window_spectral.md](reports/eeg_window_spectral.md). It evaluates the saved causal 4 s → 4 s and masked 50 ms / 25% seed-600 encoders plus their untrained controls using train-only ridge fits, the original participant split, mean and mean+std patch pooling, and paired participant bootstrap intervals. Run `CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=1 .venv-gpu/bin/python -m temporal_ssl.eeg_window_spectral`. No SSL training or participant averaging is performed.

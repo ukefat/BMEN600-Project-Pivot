@@ -73,3 +73,26 @@ def test_latent_optimizer_and_sigreg_rng_resume(tmp_path):
     advance(resumed,c,gc,2)
     for k,v in full.state_dict().items():torch.testing.assert_close(v,resumed.state_dict()[k],rtol=0,atol=0)
     torch.testing.assert_close(ga.get_state(),gc.get_state(),rtol=0,atol=0)
+
+
+def test_exact_target_neighborhood_and_local_gradients():
+    for context in [1,5]:
+        torch.manual_seed(600)
+        m=MaskedLatentPrediction(3,40,patch_size=5,d_model=8,nhead=2,layers=2,target_context=context).eval()
+        x=torch.randn(4,40,3);center=3;r=context//2
+        changed=x.clone();changed[:,:max(0,center-r)*5]+=1000;changed[:,(center+r+1)*5:]-=1000
+        torch.testing.assert_close(m.encode_targets(x)[:,center],m.encode_targets(changed)[:,center],rtol=0,atol=0)
+        target=m.encode_targets(x)
+        patches=x.reshape(4,8,15);tokens=m.embedding(patches)+m.positions[:8]
+        expected=m.encoder(tokens[:,center-r:center+r+1])[:,r]
+        torch.testing.assert_close(target[:,center],expected)
+        mask=torch.zeros(4,8,dtype=torch.bool);mask[:,3]=True
+        result=m(x,mask);result['target'].retain_grad();result['latent_loss'].backward()
+        assert result['target'].grad.norm()>0 and m.embedding.weight.grad.norm()>0
+
+
+def test_target_window_boundary_does_not_duplicate_observations():
+    m=MaskedLatentPrediction(3,40,patch_size=5,d_model=8,nhead=2,layers=2,target_context=5).eval()
+    x=torch.randn(2,40,3);tokens=m.embedding(x.reshape(2,8,15))+m.positions[:8]
+    torch.testing.assert_close(m.encode_targets(x)[:,0],m.encoder(tokens[:,:3])[:,0])
+    torch.testing.assert_close(m.encode_targets(x)[:,-1],m.encoder(tokens[:,-3:])[:,-1])

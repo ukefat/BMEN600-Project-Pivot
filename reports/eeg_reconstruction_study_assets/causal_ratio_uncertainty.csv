@@ -1,0 +1,2 @@
+contrast,balanced_accuracy_difference,lower_95,upper_95,bootstrap_samples
+causal_approx2to1_minus_1to1,0.024867724867724872,-0.1375661375661375,0.18943121693121676,5000

@@ -66,7 +66,7 @@ def test_paired_participant_bootstrap(tmp_path):
 def test_span_mask_exact_count_edges_and_resume():
     from temporal_ssl.eeg_pilot import mask_runs
     for span in [2,4]:
-        for ratio in [.25,.5]:
+        for ratio in [.25,.5,.75]:
             g=torch.Generator().manual_seed(8)
             state=g.get_state();m=random_mask(128,160,ratio,g,span)
             restored=torch.Generator();restored.set_state(state)

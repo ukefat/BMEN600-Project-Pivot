@@ -1,0 +1,15 @@
+{
+  "new_causal_runs": 3,
+  "new_masked_runs": 9,
+  "reused_runs": 24,
+  "total_models": 36,
+  "paired_seeds": 3,
+  "parameters_per_model": 56411,
+  "updates_per_model": 10000,
+  "draws_per_model": 640000,
+  "all_windows_visited": true,
+  "paired_initialization_and_sampling_verified": true,
+  "classification_metrics_verified": true,
+  "matched_masks_match_own_task_errors": true,
+  "provenance_hashes_verified": 36
+}

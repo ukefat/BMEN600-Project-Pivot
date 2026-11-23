@@ -1,0 +1,12 @@
+{
+  "new_causal_runs": 6,
+  "reused_masked_runs": 18,
+  "equal_parameters": 56411,
+  "updates_per_run": 10000,
+  "draws_per_run": 640000,
+  "all_windows_visited": true,
+  "initialization_and_sampling_exactly_match_masked": true,
+  "checkpoint_hashes_verified": 24,
+  "horizon_and_aggregate_metrics_match": true,
+  "classification_verified": true
+}
