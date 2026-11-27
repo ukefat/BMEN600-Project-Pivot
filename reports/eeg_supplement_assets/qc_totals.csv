@@ -1,0 +1,5 @@
+split,original_samples,retained_samples,provider_removed_samples,provider_removed_seconds,internal_boundaries,contiguous_segments,complete_candidates,segment_tail_samples,segment_tail_seconds,usable_windows,selected_panel_windows,rejected_windows,nonfinite_rejections,flat_rejections
+test,7552400,7461290,91110,182.22,120,138,1809,225290,450.58,1809,432,0,0,0
+train,20420250,20198510,221740,443.48,300,352,4894,622510,1245.02,4894,1248,0,0,0
+validation,7322500,7255760,66740,133.48000000000002,92,110,1761,211760,423.52,1761,432,0,0,0
+all,35295150,34915560,379590,759.1800000000001,512,600,8464,1059560,2119.12,8464,2112,0,0,0
