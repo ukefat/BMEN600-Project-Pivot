@@ -1,0 +1,49 @@
+{
+  "synthetic": {
+    "source": "results/research/predictable-causal-d7-m11",
+    "split": "test",
+    "trajectory_index": 0,
+    "seed_entropy": 7,
+    "spawn_key": [
+      2,
+      0
+    ],
+    "parameters": {
+      "delta": 0.027788801921987433,
+      "threshold": 0.9506747351764774,
+      "omega0": 0.13665047997134191,
+      "omega1": 0.494637546875068,
+      "visibility": 0.6,
+      "hazard": 0.02923060947531007
+    },
+    "verification": "exact equality to saved normalized reconstruction x",
+    "manifest_sha256": "0b0cffdc8a6990b22d06e6c6a2e211532b9f93581dba2330bbe3f96e7ed1c836"
+  },
+  "eeg": {
+    "dataset": "ds004504",
+    "participant": "sub-001",
+    "split": "train",
+    "epoch_index": 0,
+    "source_start_sample": 0,
+    "display_samples": [
+      0,
+      1000
+    ],
+    "channels": [
+      "Fp1",
+      "F3",
+      "C3",
+      "P3"
+    ],
+    "sampling_hz": 500,
+    "cache_sha256": "4e4d297de41771b5e3ff487dc31068288b27e29bd0e3bf4a9c52c63dab656fe3",
+    "units": "microvolts",
+    "processing": "cached cleaned 0.5\u201345 Hz derivatives; no new filtering or per-channel scaling"
+  },
+  "display": {
+    "eeg": "constant vertical offsets only; common 0.12 viewBox units per microvolt",
+    "synthetic": "first observed channel and true accumulator/regime; separate labeled lanes",
+    "patches": "schematic counts; visible waveform snippets are actual 25-sample EEG patches; hidden slots contain no fabricated predictions"
+  },
+  "signal_extract_sha256": "17351bcef7cfa69175661a066699d717789a9016c6cb9f9d53d3d0e98d0f6a45"
+}
