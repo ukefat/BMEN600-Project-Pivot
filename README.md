@@ -149,6 +149,8 @@ Test masks use a separate fixed evaluation seed and are identical for runs with 
 
 ## Larger paired-seed experiment
 
+The explanatory [synthetic results summary](reports/synthetic_summary.md) connects the completed study to the EEG reconstruction, spectral recovery and diagnosis results. It includes state/parameter definitions, controls, figures and wording suitable for a presentation or discussion.
+
 `configs/research.json` defines 512/128/128 trajectories, 128-sample sequences, the same small 32-dimensional two-layer models, batch size 32, and three paired data/model seeds. The eight-condition system matrix produces 24 runs. Its validation-only pilot trains every condition for 50 epochs. If any run improves its best validation loss by at least 2% between epochs 31–40 and 41–50, **every** run extends to the same 100-epoch budget. Test evaluation occurs only after the common training budget is complete. This rule is a practical budget decision, not a convergence guarantee.
 
 ```bash
