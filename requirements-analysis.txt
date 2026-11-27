@@ -1,0 +1,7 @@
+# Recorded non-Torch analysis/test dependencies; install the recorded Torch wheel separately.
+-r requirements-report.txt
+scipy==1.18.1
+scikit-learn==1.9.1
+requests==2.34.2
+joblib==1.6.0
+pytest==9.2.0

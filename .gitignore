@@ -5,3 +5,14 @@ __pycache__/
 .pytest_cache/
 results/
 data/
+# Local environments, downloaded data and transient outputs
+.venv*/
+.env
+.env.*
+!.env.example
+*.pt
+*.pth
+*.ckpt
+*.log
+*.tmp
+.DS_Store
